@@ -1,25 +1,45 @@
-import React from 'react';
-import logo from './logo.svg';
-import './App.css';
+import "bootstrap/dist/css/bootstrap.min.css";
+import {
+  Container,
+  Row,
+  Navbar,
+  FormControl,
+  Form,
+  Button,
+  Col,
+} from "react-bootstrap";
+import { useMovies } from "./services/firebase";
+import { MovieCard } from "./components/cards/MovieCard";
 
 function App() {
+  const movies = useMovies();
+
   return (
-    <div className="App">
-      <header className="App-header">
-        <img src={logo} className="App-logo" alt="logo" />
-        <p>
-          Edit <code>src/App.tsx</code> and save to reload.
-        </p>
-        <a
-          className="App-link"
-          href="https://reactjs.org"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          Learn React
-        </a>
-      </header>
-    </div>
+    <>
+      <Navbar expand="lg" variant="dark" bg="dark">
+        <Container>
+          <Navbar.Brand href="#">FavoFlix</Navbar.Brand>
+          <Form className="d-flex">
+            <FormControl
+              type="search"
+              placeholder="Search"
+              className="mr-2"
+              aria-label="Search"
+            />
+            <Button variant="primary">Search</Button>
+          </Form>
+        </Container>
+      </Navbar>
+      <Container className={"mt-4"}>
+        <Row className="mx-0 row-cols-4">
+          {movies.map((movie) => (
+            <Col key={movie.id} className={"pb-4"}>
+              <MovieCard key={movie.id} movie={movie} />
+            </Col>
+          ))}
+        </Row>
+      </Container>
+    </>
   );
 }
 
