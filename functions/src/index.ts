@@ -7,7 +7,7 @@ exports.handleSuggestion = functions.firestore
     .onCreate(async (snapshot) => {
       const movie = snapshot.data().name;
       const id = snapshot.id;
-      const client = new omdb.OmdbApiClient("dd2e5b5a");
+      const client = new omdb.OmdbApiClient("");
       const result = await client.getByTitle(movie, {});
       const now = admin.firestore.Timestamp.now();
       return admin
