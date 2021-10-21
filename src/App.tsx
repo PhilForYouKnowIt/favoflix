@@ -8,8 +8,8 @@ import {
   Button,
   Col,
 } from "react-bootstrap";
-import { useMovies } from "./services/firebase";
-import { MovieCard } from "./components/cards/MovieCard";
+import { useMovies } from "services/firebase";
+import { MovieCard } from "components/cards/MovieCard";
 
 function App() {
   const movies = useMovies();

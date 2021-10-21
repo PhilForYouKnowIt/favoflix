@@ -1,5 +1,5 @@
 import { Card } from "react-bootstrap";
-import { Movie } from "../../services/firebase";
+import { Movie } from "services/firebase";
 
 type MovieCardProps = {
   movie: Movie;

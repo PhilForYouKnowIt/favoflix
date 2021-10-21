@@ -18,8 +18,6 @@ const firebaseConfig = {
   appId: process.env.REACT_APP_FIREBASE_APP_ID,
 };
 
-console.log(process.env.REACT_APP_FIREBASE_PROJECT_ID);
-
 const app = initializeApp(firebaseConfig);
 const db = getFirestore(app);
 connectFirestoreEmulator(db, "localhost", 8080);
