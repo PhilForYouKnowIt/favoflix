@@ -7,6 +7,7 @@ import {
   collection,
   query,
   onSnapshot,
+  addDoc,
 } from "firebase/firestore";
 
 const firebaseConfig = {
@@ -59,4 +60,8 @@ export const useMovies = () => {
     return () => unsubscribe();
   }, []);
   return movies;
+};
+
+export const addSuggestion = async (name: string) => {
+  return await addDoc(collection(db, "suggestions"), { name });
 };
