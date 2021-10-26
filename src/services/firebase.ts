@@ -62,6 +62,10 @@ export const useMovies = () => {
   return movies;
 };
 
+/**
+ * Adds a new suggestion
+ * @param name
+ */
 export const addSuggestion = async (name: string) => {
   return await addDoc(collection(db, "suggestions"), { name });
 };

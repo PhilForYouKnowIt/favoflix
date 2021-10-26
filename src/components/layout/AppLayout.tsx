@@ -18,16 +18,12 @@ export const AppLayout = ({ children }: AppLayoutProps): JSX.Element => {
     <div>
       <Navbar expand="lg" variant="dark" bg="dark">
         <Container>
-          <Navbar.Brand href="#">FavoFlix</Navbar.Brand>
+          <LinkContainer to="/">
+            <Navbar.Brand>FavoFlix</Navbar.Brand>
+          </LinkContainer>
           <Navbar.Toggle aria-controls="basic-navbar-nav" />
           <Navbar.Collapse id="basic-navbar-nav">
             <Nav className="me-auto">
-              <LinkContainer to="/">
-                <Nav.Link>Home</Nav.Link>
-              </LinkContainer>
-              <LinkContainer to="/search">
-                <Nav.Link>Search</Nav.Link>
-              </LinkContainer>
               <LinkContainer to="/suggest">
                 <Nav.Link>Suggest</Nav.Link>
               </LinkContainer>
