@@ -66,21 +66,28 @@ export const useMovies = () => {
 
 /**
  * Load a movie record by id
- * @param props
+ * @param id
  */
 export const useMovie = (id: string) => {
   const [movie, setMovie] = useState<Movie | null>(null);
+  const [loading, setLoading] = useState<boolean>(false);
 
   useEffect(() => {
     const getMovie = async (id: string) => {
+      setLoading(true);
       const docRef = doc(db, "movies", id);
       const docSnap = await getDoc(docRef);
-      setMovie(docSnap.data() as Movie);
+      setLoading(false);
+      if (!docSnap.exists()) {
+        setMovie(null);
+      } else {
+        setMovie(docSnap.data() as Movie);
+      }
     };
     getMovie(id).then();
   }, [id]);
 
-  return movie;
+  return [movie, loading];
 };
 
 /**
