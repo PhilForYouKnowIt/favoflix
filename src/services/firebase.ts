@@ -8,6 +8,8 @@ import {
   query,
   onSnapshot,
   addDoc,
+  doc,
+  getDoc,
 } from "firebase/firestore";
 
 const firebaseConfig = {
@@ -60,6 +62,25 @@ export const useMovies = () => {
     return () => unsubscribe();
   }, []);
   return movies;
+};
+
+/**
+ * Load a movie record by id
+ * @param props
+ */
+export const useMovie = (id: string) => {
+  const [movie, setMovie] = useState<Movie | null>(null);
+
+  useEffect(() => {
+    const getMovie = async (id: string) => {
+      const docRef = doc(db, "movies", id);
+      const docSnap = await getDoc(docRef);
+      setMovie(docSnap.data() as Movie);
+    };
+    getMovie(id).then();
+  }, [id]);
+
+  return movie;
 };
 
 /**
