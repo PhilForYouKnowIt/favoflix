@@ -10,7 +10,7 @@ export const MovieView = (): JSX.Element => {
   const [movie, loading] = useMovie(id);
 
   if (loading) return <Spinner animation="border" />;
-  if (!movie) return <>not found</>;
+  if (!movie) return <>404 not found</>;
 
   return <pre>{JSON.stringify(movie, null, 2)}</pre>;
 };

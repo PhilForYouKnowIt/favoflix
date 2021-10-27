@@ -1,6 +1,7 @@
 import { useState, useEffect } from "react";
 import { initializeApp } from "firebase/app";
 import { getFunctions, connectFunctionsEmulator } from "firebase/functions";
+import { getStorage, connectStorageEmulator } from "firebase/storage";
 import {
   getFirestore,
   connectFirestoreEmulator,
@@ -27,6 +28,9 @@ connectFirestoreEmulator(db, "localhost", 8080);
 
 const functions = getFunctions(app);
 connectFunctionsEmulator(functions, "localhost", 5001);
+
+export const storage = getStorage(app);
+connectStorageEmulator(storage, "localhost", 9199);
 
 export interface Movie {
   id: string;
@@ -59,7 +63,9 @@ export const useMovies = () => {
         )
       );
     });
-    return () => unsubscribe();
+    return () => {
+      unsubscribe();
+    };
   }, []);
   return movies;
 };

@@ -27,6 +27,9 @@ export const AppLayout = ({ children }: AppLayoutProps): JSX.Element => {
               <LinkContainer to="/suggest">
                 <Nav.Link>Suggest</Nav.Link>
               </LinkContainer>
+              <LinkContainer to="/upload">
+                <Nav.Link>Upload</Nav.Link>
+              </LinkContainer>
             </Nav>
           </Navbar.Collapse>
           <Form className="d-flex">

@@ -20,7 +20,7 @@ code {
 .toasts-wrapper {
   z-index: 10;
   position: fixed;
-  bottom: 1rem;
-  left: 1rem;
+  top: 1rem;
+  right: 1rem;
 }
 
