@@ -1,5 +1,4 @@
 import { Form, ProgressBar } from "react-bootstrap";
-import LoadingButton from "components/misc/LoadingButton";
 import React, { useState } from "react";
 import { storage } from "services/firebase";
 import { ref, uploadBytesResumable, getDownloadURL } from "firebase/storage";
@@ -55,7 +54,11 @@ export const UploadForm = (): JSX.Element => {
             onChange={handleChange}
           />
         </Form.Group>
-        <ProgressBar now={progress} label={`${progress}%`} className={"mb-2"} />
+        <ProgressBar
+          now={progress}
+          label={`${progress}%`}
+          className={"mb-2 mt-2"}
+        />
       </fieldset>
     </Form>
   );
