@@ -1,5 +1,6 @@
 import * as functions from "firebase-functions";
 import * as omdb from "open-movie-database-api";
+// import * as fluent from "fluent-ffmpeg";
 import {admin} from "./config";
 
 exports.handleSuggestion = functions.firestore
@@ -30,3 +31,8 @@ exports.handleSuggestion = functions.firestore
             createdAt: now,
           });
     });
+
+exports.generateClip = functions.storage.object().onFinalize(async (object) => {
+  const contentType = object.contentType; // File content type.
+  return functions.logger.log("File uploaded ", contentType);
+});
