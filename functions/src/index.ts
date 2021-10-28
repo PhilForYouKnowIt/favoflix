@@ -1,7 +1,35 @@
 import * as functions from "firebase-functions";
 import * as omdb from "open-movie-database-api";
-// import * as fluent from "fluent-ffmpeg";
 import {admin} from "./config";
+import algoliasearch from "algoliasearch";
+
+const algoliaClient = algoliasearch(
+    functions.config().algolia.app_id,
+    functions.config().algolia.admin_api_key
+);
+
+const moviesIndex = algoliaClient.initIndex("movies");
+
+exports.onAddMovie = functions.firestore
+    .document("movies/{id}")
+    .onCreate((orgSnapshot) => {
+      const data = orgSnapshot.data();
+      const objectID = orgSnapshot.id;
+      const title = data.title;
+      const actors = data.actors;
+      const genres = data.genres;
+      const year = parseInt(data.year);
+      const poster = data.poster;
+      functions.logger.info("Adding movie ", {data});
+      return moviesIndex.saveObject({
+        title,
+        genres,
+        actors,
+        year,
+        poster,
+        objectID,
+      });
+    });
 
 exports.handleSuggestion = functions.firestore
     .document("suggestions/{id}")

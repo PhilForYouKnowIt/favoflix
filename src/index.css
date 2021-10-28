@@ -24,3 +24,17 @@ code {
   right: 1rem;
 }
 
+.aa-Panel {
+  background-color: white;
+  padding: 2px;
+  border: 1px solid black;
+  position: fixed;
+  max-width: 500px;
+  width: 100%;
+}
+
+.aa-List {
+  list-style: none;
+  padding: 5px;
+}
+

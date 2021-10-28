@@ -1,13 +1,7 @@
-import {
-  Button,
-  Container,
-  Form,
-  FormControl,
-  Nav,
-  Navbar,
-} from "react-bootstrap";
+import { Container, Nav, Navbar } from "react-bootstrap";
 import React from "react";
 import { LinkContainer } from "react-router-bootstrap";
+import { Autocomplete } from "components/search/Autocomplete";
 
 export interface AppLayoutProps {
   children: React.ReactNode;
@@ -32,15 +26,13 @@ export const AppLayout = ({ children }: AppLayoutProps): JSX.Element => {
               </LinkContainer>
             </Nav>
           </Navbar.Collapse>
-          <Form className="d-flex">
-            <FormControl
-              type="search"
+          <div className="d-flex">
+            <Autocomplete
               placeholder="Search"
-              className="mr-2"
-              aria-label="Search"
+              openOnFocus={true}
+              debug={true}
             />
-            <Button variant="primary">Search</Button>
-          </Form>
+          </div>
         </Container>
       </Navbar>
       <Container className={"mt-4"}>{children}</Container>
