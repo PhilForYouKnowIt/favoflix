@@ -11,6 +11,7 @@ exports.handleSuggestion = functions.firestore
       const apiKey = functions.config().omdb.api_key;
       const client = new omdb.OmdbApiClient(apiKey);
       const result = await client.getByTitle(movie, {});
+      if (result.Response === "False") return null;
       const now = admin.firestore.Timestamp.now();
       return admin
           .firestore()
@@ -21,7 +22,7 @@ exports.handleSuggestion = functions.firestore
             rated: result.Rated,
             year: result.Year,
             director: result.Director,
-            country: result.Country,
+            country: result.Country.split(", "),
             plot: result.Plot,
             genres: result.Genre.split(", "),
             poster: result.Poster,
