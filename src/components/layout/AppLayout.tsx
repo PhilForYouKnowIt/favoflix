@@ -27,11 +27,7 @@ export const AppLayout = ({ children }: AppLayoutProps): JSX.Element => {
             </Nav>
           </Navbar.Collapse>
           <div className="d-flex">
-            <Autocomplete
-              placeholder="Search"
-              openOnFocus={true}
-              debug={true}
-            />
+            <Autocomplete placeholder="Search" openOnFocus={true} />
           </div>
         </Container>
       </Navbar>

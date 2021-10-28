@@ -26,15 +26,21 @@ code {
 
 .aa-Panel {
   background-color: white;
-  padding: 2px;
   border: 1px solid black;
   position: fixed;
   max-width: 500px;
   width: 100%;
+  z-index: 10;
 }
 
 .aa-List {
   list-style: none;
-  padding: 5px;
+  padding: 0;
 }
 
+.aa-List li:hover {
+  background-color: #eee;
+}
+.aa-ItemWrapper {
+  padding: 1rem;
+}
