@@ -11,6 +11,8 @@ import {
   addDoc,
   doc,
   getDoc,
+  orderBy,
+  limit,
 } from "firebase/firestore";
 
 const firebaseConfig = {
@@ -49,7 +51,11 @@ export const useMovies = () => {
   const [movies, setMovies] = useState<Movie[]>([]);
 
   useEffect(() => {
-    const q = query(collection(db, "movies"));
+    const q = query(
+      collection(db, "movies"),
+      orderBy("year", "desc"),
+      limit(8)
+    );
     const unsubscribe = onSnapshot(q, (moviesSnapshot) => {
       setMovies(
         moviesSnapshot.docs.map(

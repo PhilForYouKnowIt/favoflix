@@ -26,3 +26,6 @@ yarn-error.log*
 /firestore-debug.log
 /firebase-debug.log
 /functions/.runtimeconfig.json
+/tools/serviceAccount.json
+/tools/.env
+/tools/node_modules/
