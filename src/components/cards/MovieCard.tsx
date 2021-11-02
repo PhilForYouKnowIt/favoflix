@@ -8,7 +8,7 @@ type MovieCardProps = {
 export const MovieCard = (props: MovieCardProps) => {
   return (
     <LinkContainer to={`/movie/${props.movie.id}`}>
-      <Card className="h-100">
+      <Card className="h-100 shadow">
         <Card.Img variant="top" className="fit-img" src={props.movie.poster} />
         <Card.Body>
           <Card.Title>{props.movie.title}</Card.Title>

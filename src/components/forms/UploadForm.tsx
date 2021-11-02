@@ -2,9 +2,11 @@ import { Form, ProgressBar } from "react-bootstrap";
 import React, { useState } from "react";
 import { storage } from "services/firebase";
 import { ref, uploadBytesResumable, getDownloadURL } from "firebase/storage";
+import { ADD, useToastContext } from "components/misc/ToastContext";
 
 export const UploadForm = (): JSX.Element => {
   const [progress, setProgress] = useState(0);
+  const toastContext = useToastContext();
 
   const handleSubmit = (event: React.SyntheticEvent) => {
     event.preventDefault();
@@ -30,13 +32,26 @@ export const UploadForm = (): JSX.Element => {
           }
         },
         (error) => {
-          // Handle unsuccessful uploads
+          // todo handle unsuccessful uploads
           console.error(error.message);
         },
         () => {
-          // Successful
+          // Successful upload
           getDownloadURL(uploadTask.snapshot.ref).then((downloadURL) => {
             console.log("File available at", downloadURL);
+            toastContext.toastDispatch({
+              type: ADD,
+              payload: {
+                content: {
+                  title: "UPLOAD SUCCESS",
+                  message: (
+                    <a rel="noreferrer" target="_blank" href={`${downloadURL}`}>
+                      Watch movie now!
+                    </a>
+                  ),
+                },
+              },
+            });
           });
         }
       );
@@ -56,7 +71,7 @@ export const UploadForm = (): JSX.Element => {
         </Form.Group>
         <ProgressBar
           now={progress}
-          label={`${progress}%`}
+          label={`${Math.round(progress)}%`}
           className={"mb-2 mt-2"}
         />
       </fieldset>

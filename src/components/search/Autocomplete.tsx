@@ -8,6 +8,7 @@ import { Hit } from "@algolia/client-search";
 import algoliasearch from "algoliasearch/lite";
 import React from "react";
 import { LinkContainer } from "react-router-bootstrap";
+import { Col, Row } from "react-bootstrap";
 
 const searchClient = algoliasearch(
   process.env.REACT_APP_ALGOLIA_ID as string,
@@ -130,7 +131,7 @@ export function Autocomplete(
             .join(" ")}
           {...autocomplete.getPanelProps({})}
         >
-          <div className="aa-PanelLayout aa-Panel--scrollable">
+          <div className="aa-PanelLayout">
             {autocompleteState.collections.map((collection, index) => {
               const { source, items } = collection;
 
@@ -145,25 +146,19 @@ export function Autocomplete(
                             {...autocomplete.getItemProps({ item, source })}
                           >
                             <LinkContainer to={`/movie/${item.objectID}`}>
-                              <div className="aa-ItemWrapper">
-                                <div className="aa-ItemContent">
-                                  <div className="aa-ItemIcon aa-ItemIcon--picture aa-ItemIcon--alignTop">
-                                    <img
-                                      src={item.poster}
-                                      alt={item.title}
-                                      width="60"
-                                    />
-                                  </div>
-                                  <div className="aa-ItemContentBody">
-                                    <div className="aa-ItemContentTitle">
-                                      {item.title} - <i>{item.year}</i>
-                                    </div>
-                                    <div className="aa-ItemContentDescription">
-                                      <strong>{item.genres.join(", ")}</strong>
-                                    </div>
-                                  </div>
-                                </div>
-                              </div>
+                              <Row className={"aa-ItemWrapper"}>
+                                <Col xs={2} className={""}>
+                                  <img
+                                    src={item.poster}
+                                    alt={item.title}
+                                    width="60"
+                                  />
+                                </Col>
+                                <Col xs={10}>
+                                  <b>{item.title}</b>
+                                  <p className="text-secondary">{item.year}</p>
+                                </Col>
+                              </Row>
                             </LinkContainer>
                           </li>
                         );

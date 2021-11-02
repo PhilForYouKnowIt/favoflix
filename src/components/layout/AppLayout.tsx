@@ -9,8 +9,8 @@ export interface AppLayoutProps {
 
 export const AppLayout = ({ children }: AppLayoutProps): JSX.Element => {
   return (
-    <div>
-      <Navbar expand="lg" variant="dark" bg="dark">
+    <>
+      <Navbar expand="lg" variant="dark" bg="dark" className={"fixed-top"}>
         <Container>
           <LinkContainer to="/">
             <Navbar.Brand>FavoFlix</Navbar.Brand>
@@ -31,7 +31,7 @@ export const AppLayout = ({ children }: AppLayoutProps): JSX.Element => {
           </div>
         </Container>
       </Navbar>
-      <Container className={"mt-4"}>{children}</Container>
-    </div>
+      <Container className={"mt-4 pt-5"}>{children}</Container>
+    </>
   );
 };
