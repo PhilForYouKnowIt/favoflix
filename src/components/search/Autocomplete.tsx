@@ -26,6 +26,7 @@ type AutocompleteItem = Hit<{
 export function Autocomplete(
   props: Partial<AutocompleteOptions<AutocompleteItem>>
 ) {
+  const [indexSize, setIndexSize] = React.useState<number>(0);
   const [autocompleteState, setAutocompleteState] = React.useState<
     AutocompleteState<AutocompleteItem>
   >({
@@ -61,15 +62,10 @@ export function Autocomplete(
                       query,
                       params: {
                         hitsPerPage: 8,
-                        highlightPreTag: "<mark>",
-                        highlightPostTag: "</mark>",
                       },
                     },
                   ],
                 });
-              },
-              getItemUrl({ item }) {
-                return "/movies/" + item.objectID;
               },
             },
           ];
@@ -82,6 +78,11 @@ export function Autocomplete(
   const formRef = React.useRef<HTMLFormElement>(null);
   const panelRef = React.useRef<HTMLDivElement>(null);
   const { getEnvironmentProps } = autocomplete;
+
+  React.useEffect(() => {
+    const index = searchClient.initIndex("movies");
+    index.search("").then((r) => setIndexSize(r.nbHits));
+  }, []);
 
   React.useEffect(() => {
     if (!formRef.current || !panelRef.current || !inputRef.current) {
@@ -118,7 +119,6 @@ export function Autocomplete(
           />
         </div>
       </form>
-
       {autocompleteState.isOpen && (
         <div
           ref={panelRef}
@@ -137,6 +137,7 @@ export function Autocomplete(
 
               return (
                 <section key={`source-${index}`} className="aa-Source">
+                  Total size: {indexSize}
                   {items.length > 0 && (
                     <ul className="aa-List" {...autocomplete.getListProps()}>
                       {items.map((item) => {

@@ -18,10 +18,10 @@ code {
 }
 
 .toasts-wrapper {
-  z-index: 10;
+  z-index: 10001;
   position: fixed;
-  top: 1rem;
-  right: 1rem;
+  top: 2rem;
+  right: 45%;
 }
 
 .aa-Panel {
