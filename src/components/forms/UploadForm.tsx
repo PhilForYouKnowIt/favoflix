@@ -38,7 +38,6 @@ export const UploadForm = (): JSX.Element => {
         () => {
           // Successful upload
           getDownloadURL(uploadTask.snapshot.ref).then((downloadURL) => {
-            console.log("File available at", downloadURL);
             toastContext.toastDispatch({
               type: ADD,
               payload: {
