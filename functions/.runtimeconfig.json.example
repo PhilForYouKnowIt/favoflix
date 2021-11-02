@@ -1,0 +1,9 @@
+{
+  "omdb": {
+    "api_key": "ENTER-HERE"
+  },
+  "algolia": {
+    "app_id": "ENTER-HERE",
+    "admin_api_key": "ENTER-HERE"
+  }
+}
