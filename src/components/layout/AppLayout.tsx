@@ -1,13 +1,18 @@
 import { Container, Nav, Navbar } from "react-bootstrap";
-import React from "react";
+import React, { useContext } from "react";
 import { LinkContainer } from "react-router-bootstrap";
 import { Autocomplete } from "components/search/Autocomplete";
+import { LoginModalView } from "components/views/LoginModalView";
+import { UserContext } from "App";
+import { LogoutButton } from "components/forms/LogoutButton";
 
 export interface AppLayoutProps {
   children: React.ReactNode;
 }
 
 export const AppLayout = ({ children }: AppLayoutProps): JSX.Element => {
+  const userContext = useContext(UserContext);
+
   return (
     <>
       <Navbar expand="lg" variant="dark" bg="dark" className={"fixed-top"}>
@@ -24,6 +29,7 @@ export const AppLayout = ({ children }: AppLayoutProps): JSX.Element => {
               <LinkContainer to="/upload">
                 <Nav.Link>Upload</Nav.Link>
               </LinkContainer>
+              {userContext.user ? <LogoutButton /> : <LoginModalView />}
             </Nav>
           </Navbar.Collapse>
           <div className="d-flex">

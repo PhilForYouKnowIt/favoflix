@@ -2,6 +2,7 @@ import { useState, useEffect } from "react";
 import { initializeApp } from "firebase/app";
 import { getFunctions, connectFunctionsEmulator } from "firebase/functions";
 import { getStorage, connectStorageEmulator } from "firebase/storage";
+import { getAuth, connectAuthEmulator } from "firebase/auth";
 import {
   getFirestore,
   connectFirestoreEmulator,
@@ -30,10 +31,13 @@ const db = getFirestore(app);
 connectFirestoreEmulator(db, "localhost", 8080);
 
 const functions = getFunctions(app);
-connectFunctionsEmulator(functions, "localhost", 5001);
+connectFunctionsEmulator(functions, "localhost", 5002);
 
 export const storage = getStorage(app);
 connectStorageEmulator(storage, "localhost", 9199);
+
+export const auth = getAuth(app);
+connectAuthEmulator(auth, "http://localhost:5001");
 
 export interface Movie {
   id: string;

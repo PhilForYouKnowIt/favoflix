@@ -58,7 +58,7 @@ export const UploadForm = (): JSX.Element => {
   };
 
   return (
-    <Form noValidate onSubmit={handleSubmit}>
+    <Form autoComplete="off" noValidate onSubmit={handleSubmit}>
       <fieldset disabled={false}>
         <Form.Group controlId="file">
           <Form.Control
