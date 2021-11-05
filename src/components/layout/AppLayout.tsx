@@ -1,4 +1,4 @@
-import { Container, Nav, Navbar } from "react-bootstrap";
+import { Container, Nav, Navbar, NavItem } from "react-bootstrap";
 import React, { useContext } from "react";
 import { LinkContainer } from "react-router-bootstrap";
 import { Autocomplete } from "components/search/Autocomplete";
@@ -15,7 +15,12 @@ export const AppLayout = ({ children }: AppLayoutProps): JSX.Element => {
 
   return (
     <>
-      <Navbar expand="lg" variant="dark" bg="dark" className={"fixed-top"}>
+      <Navbar
+        expand="lg"
+        variant="dark"
+        bg="dark"
+        className={"fixed-top shadow-sm"}
+      >
         <Container>
           <LinkContainer to="/">
             <Navbar.Brand>FavoFlix</Navbar.Brand>
@@ -29,12 +34,23 @@ export const AppLayout = ({ children }: AppLayoutProps): JSX.Element => {
               <LinkContainer to="/upload">
                 <Nav.Link>Upload</Nav.Link>
               </LinkContainer>
-              {userContext.user ? <LogoutButton /> : <LoginModalView />}
+            </Nav>
+            <Nav>
+              <NavItem className={"m-auto"}>
+                <Autocomplete
+                  openOnFocus={true}
+                  placeholder={"Search movies"}
+                />
+              </NavItem>
+              <NavItem className={"ms-3"}>
+                {userContext.user ? (
+                  <LogoutButton label={"Logout"} />
+                ) : (
+                  <LoginModalView />
+                )}
+              </NavItem>
             </Nav>
           </Navbar.Collapse>
-          <div className="d-flex">
-            <Autocomplete openOnFocus={true} />
-          </div>
         </Container>
       </Navbar>
       <Container className={"mt-4 pt-5"}>{children}</Container>
