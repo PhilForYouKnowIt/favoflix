@@ -113,7 +113,7 @@ export function Autocomplete(
       >
         <div className="aa-InputWrapper">
           <input
-            className="aa-Input"
+            className="aa-Input form-control me-2"
             ref={inputRef}
             {...autocomplete.getInputProps({ inputElement: inputRef.current })}
           />
